@@ -15,7 +15,7 @@ public class ValidatePan
     public ValidatePan(ILoggerFactory loggerFactory) => _logger = loggerFactory.CreateLogger<ValidatePan>();
 
     [Function("ValidatePan")]
-    public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
+    public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
     {
         var body = await new StreamReader(req.Body).ReadToEndAsync();
         var payload = JsonSerializer.Deserialize<Request>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
